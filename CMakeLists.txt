@@ -14,10 +14,10 @@ add_subdirectory(dependencies)
 #)
 
 include_directories(
-    ${GLFW_INCLUDE_DIRS}    # must have been set as CACHE INTERNAL by the 3rdparty cmake
+    ${GLAD_INCLUDE_DIRS}
 )
 
 add_executable(renderer
     main.cpp
 )
-target_link_libraries(renderer PRIVATE glfw)
+target_link_libraries(renderer PRIVATE glad glfw)

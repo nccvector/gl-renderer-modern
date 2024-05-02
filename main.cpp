@@ -1,5 +1,12 @@
 #include <iostream>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+void processInput( GLFWwindow* window ) {
+  if ( glfwGetKey( window, GLFW_KEY_ESCAPE ) == GLFW_PRESS ) {
+    glfwSetWindowShouldClose( window, true );
+  }
+}
 
 int main() {
   glfwInit();
@@ -14,8 +21,25 @@ int main() {
     return -1;
   }
   glfwMakeContextCurrent( window );
+  // TODO: SET RESIZE CALLBACK HERE...
+
+  if ( !gladLoadGLLoader( (GLADloadproc) glfwGetProcAddress ) ) {
+    std::cout << "Failed to initialize GLAD" << std::endl;
+    return -1;
+  }
 
   while ( !glfwWindowShouldClose( window ) ) {
+    // input
+    // -----
+    processInput( window );
+
+    // render
+    // ------
+    glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
+    glClear( GL_COLOR_BUFFER_BIT );
+
+    // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+    // -------------------------------------------------------------------------------
     glfwSwapBuffers( window );
     glfwPollEvents();
   }
