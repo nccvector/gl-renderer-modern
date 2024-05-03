@@ -26,6 +26,41 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(spdlog)
 # ================================================================================
 
+# ================================================================================
+# IMGUI
+# ================================================================================
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui
+    GIT_TAG "docking"
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+)
+
+FetchContent_MakeAvailable(imgui)
+
+set(IMGUI_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+)
+set(IMGUI_INCLUDE_DIRS ${IMGUI_INCLUDE_DIRS} CACHE INTERNAL "IMGUI INCLUDE PATHS")
+add_library(imgui)
+target_include_directories(imgui PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+)
+target_sources(imgui PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_demo.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_draw.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_tables.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_widgets.cpp
+)
+target_sources(imgui PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+)
+target_link_libraries(imgui PRIVATE glfw)
+# ================================================================================
 
 # ================================================================================
 # GLAD

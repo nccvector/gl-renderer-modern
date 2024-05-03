@@ -13,8 +13,6 @@ target_sources(logging PUBLIC
     logging.ixx
 )
 target_link_libraries(logging PRIVATE
-    glfw
-    glad
     spdlog
 )
 
@@ -30,16 +28,29 @@ target_link_libraries(graphics PRIVATE
     logging
 )
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
+# Add Gui module as library
+add_library(gui)
+target_sources(gui PUBLIC
+    FILE_SET CXX_MODULES FILES
+    gui.ixx
+)
+target_include_directories(gui PRIVATE
+    ${IMGUI_INCLUDE_DIRS}
+)
+target_link_libraries(gui PRIVATE
+    glfw
+    imgui
+    logging
 )
 
+# Add executable
 add_executable(renderer
     main.cpp
 )
 target_link_libraries(renderer PRIVATE
     glad
     glfw
-    spdlog
+    logging
     graphics
+    gui
 )
