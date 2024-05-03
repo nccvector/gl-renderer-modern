@@ -2,8 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "logging.h"
-
+import logging;
 import graphics;
 
 void processInput( GLFWwindow* window ) {
@@ -13,8 +12,7 @@ void processInput( GLFWwindow* window ) {
 }
 
 int main() {
-  // Initialize logger the first thing to do!
-  spdlog::set_level(spdlog::level::trace);
+  Info("Starting...");
 
   glfwInit();
   glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );

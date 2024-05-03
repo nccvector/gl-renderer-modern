@@ -6,7 +6,19 @@ set(CMAKE_CXX_STANDARD 26)
 # Configure Dependencies
 add_subdirectory(dependencies)
 
-# Add module as library
+# Add Logging module as library
+add_library(logging)
+target_sources(logging PUBLIC
+    FILE_SET CXX_MODULES FILES
+    logging.ixx
+)
+target_link_libraries(logging PRIVATE
+    glfw
+    glad
+    spdlog
+)
+
+# Add Graphics module as library
 add_library(graphics)
 target_sources(graphics PUBLIC
     FILE_SET CXX_MODULES FILES
@@ -15,7 +27,7 @@ target_sources(graphics PUBLIC
 target_link_libraries(graphics PRIVATE
     glfw
     glad
-    spdlog
+    logging
 )
 
 include_directories(

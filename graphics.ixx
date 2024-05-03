@@ -3,7 +3,7 @@ module;
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "logging.h"
+import logging;
 
 export module graphics;
 
@@ -11,8 +11,7 @@ export bool InitializeOpenGL() {
   // glad: load all OpenGL function pointers
   // ---------------------------------------
   if ( !gladLoadGLLoader( (GLADloadproc) glfwGetProcAddress ) ) {
-//    ERROR( "Could not load GLAD" );
-//    SPDLOG_LOGGER_ERROR( spdlog::default_logger_raw(), "Could not load GLAD" );
+    Error( "Could not load GLAD" );
     return false;
   }
 
