@@ -14,6 +14,20 @@ FetchContent_MakeAvailable(glfw)
 # ================================================================================
 
 # ================================================================================
+# SPDLOG
+# ================================================================================
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG "master"
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/spdlog
+)
+
+FetchContent_MakeAvailable(spdlog)
+# ================================================================================
+
+
+# ================================================================================
 # GLAD
 # ================================================================================
 set(GLAD_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/glad/include CACHE INTERNAL "GLAD INCLUDE PATH")

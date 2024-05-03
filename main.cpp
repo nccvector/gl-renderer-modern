@@ -2,6 +2,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "logging.h"
+
+import graphics;
+
 void processInput( GLFWwindow* window ) {
   if ( glfwGetKey( window, GLFW_KEY_ESCAPE ) == GLFW_PRESS ) {
     glfwSetWindowShouldClose( window, true );
@@ -9,6 +13,9 @@ void processInput( GLFWwindow* window ) {
 }
 
 int main() {
+  // Initialize logger the first thing to do!
+  spdlog::set_level(spdlog::level::trace);
+
   glfwInit();
   glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
   glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3 );
@@ -23,10 +30,7 @@ int main() {
   glfwMakeContextCurrent( window );
   // TODO: SET RESIZE CALLBACK HERE...
 
-  if ( !gladLoadGLLoader( (GLADloadproc) glfwGetProcAddress ) ) {
-    std::cout << "Failed to initialize GLAD" << std::endl;
-    return -1;
-  }
+  InitializeOpenGL();
 
   while ( !glfwWindowShouldClose( window ) ) {
     // input
