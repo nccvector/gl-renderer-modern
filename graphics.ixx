@@ -7,7 +7,7 @@ import logging;
 
 export module graphics;
 
-export bool InitializeOpenGL() {
+export bool InitOpenGL() {
   // glad: load all OpenGL function pointers
   // ---------------------------------------
   if ( !gladLoadGLLoader( (GLADloadproc) glfwGetProcAddress ) ) {
@@ -27,6 +27,13 @@ export bool InitializeOpenGL() {
   glEnable( GL_CULL_FACE );
   glCullFace( GL_BACK );
   glFrontFace( GL_CCW );
+
+  return true;
+}
+
+export bool ClearBackground() {
+  glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );
+  glClear( GL_COLOR_BUFFER_BIT );
 
   return true;
 }

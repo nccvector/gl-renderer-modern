@@ -7,18 +7,19 @@ module;
 
 export module logging;
 
-class Logging {
+class LoggingInstanceManager {
 public:
   static std::shared_ptr<spdlog::logger> GetLogger() {
-    static Logging logging;
-    return logging._coreLogger;
+    // Singleton
+    static LoggingInstanceManager loggingInstanceManager;
+    return loggingInstanceManager._coreLogger;
   }
 
-  Logging( Logging const& )        = delete;
-  void operator=( Logging const& ) = delete;
+  LoggingInstanceManager( LoggingInstanceManager const& )        = delete;
+  void operator=( LoggingInstanceManager const& ) = delete;
 
 private:
-  Logging() {
+  LoggingInstanceManager() {
     this->_coreLogger = spdlog::stdout_color_mt( "CORE" );
     this->_coreLogger->set_level( spdlog::level::trace );
   }
@@ -28,25 +29,25 @@ private:
 
 export template <typename... Args>
 void Error( Args... kwargs ) {
-  Logging::GetLogger()->error( kwargs... );
+  LoggingInstanceManager::GetLogger()->error( kwargs... );
 }
 
 export template <typename... Args>
 void Warn( Args... kwargs ) {
-  Logging::GetLogger()->warn( kwargs... );
+  LoggingInstanceManager::GetLogger()->warn( kwargs... );
 }
 
 export template <typename... Args>
 void Debug( Args... kwargs ) {
-  Logging::GetLogger()->debug( kwargs... );
+  LoggingInstanceManager::GetLogger()->debug( kwargs... );
 }
 
 export template <typename... Args>
 void Info( Args... kwargs ) {
-  Logging::GetLogger()->info( kwargs... );
+  LoggingInstanceManager::GetLogger()->info( kwargs... );
 }
 
 export template <typename... Args>
 void Trace( Args... kwargs ) {
-  Logging::GetLogger()->trace( kwargs... );
+  LoggingInstanceManager::GetLogger()->trace( kwargs... );
 }

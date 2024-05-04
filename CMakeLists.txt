@@ -28,6 +28,18 @@ target_link_libraries(graphics PRIVATE
     logging
 )
 
+# Add Window module as library
+add_library(window)
+target_sources(window PUBLIC
+    FILE_SET CXX_MODULES FILES
+    window.ixx
+)
+target_link_libraries(window PRIVATE
+    glad
+    glfw
+    logging
+)
+
 # Add Gui module as library
 add_library(gui)
 target_sources(gui PUBLIC
@@ -52,5 +64,6 @@ target_link_libraries(renderer PRIVATE
     glfw
     logging
     graphics
+    window
     gui
 )
